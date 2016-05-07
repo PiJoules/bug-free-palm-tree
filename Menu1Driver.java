@@ -50,6 +50,10 @@ public class Menu1Driver extends MenuDriver {
                 return new LoadSurveyDriver();
             case 6:
                 return new LoadTestDriver();
+            case 7:
+                return new SaveSurveyDriver();
+            case 8:
+                return new SaveTestDriver();
             case 9:
                 shouldExit_ = true;
                 break;

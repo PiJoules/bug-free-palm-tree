@@ -3,6 +3,8 @@ import org.json.*;  // json-20160212.jar
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.charset.Charset;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Question container class.
@@ -33,6 +35,19 @@ public class Questionnaire {
             JSONObject questionJson = questionnaireJson.getJSONObject(i);
             questions.add(new Question(questionJson));
         }
+    }
+
+    /**
+     * Save this questionnaire to a file.
+     */
+    public void save(String filename) throws IOException {
+        JSONArray jsonQuestions = new JSONArray();
+        for (Question question : questions){
+            jsonQuestions.put(question.toJSON());
+        }
+        PrintWriter pw = new PrintWriter(filename);
+        pw.print(jsonQuestions.toString());
+        pw.close();
     }
 
     /**

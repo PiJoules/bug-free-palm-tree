@@ -29,4 +29,11 @@ public class MultipleChoiceAnswer extends Answer {
     public final ArrayList<String> getChoices(){
         return choices;
     }
+
+    /**
+     * Convert choices to JSON.
+     */
+    public JSONArray toJSON(){
+        return new JSONArray(choices);
+    }
 }

@@ -8,6 +8,12 @@ public class DisplayDriver<T extends Questionnaire> extends Driver {
         System.out.print("");
     }
 
+    /**
+     * Args:
+     *      scan (Scanner)
+     *      questionnaire (Questionnaire)
+     */
+    @SuppressWarnings("unchecked")
     public Driver handleInput(Scanner scan, Object... args){
         if (args[0] != null){
             Questionnaire questionnaire = (T)args[0];
@@ -15,7 +21,7 @@ public class DisplayDriver<T extends Questionnaire> extends Driver {
             System.out.println(questionnaire.toString());
         }
         else {
-            System.err.println("Cold not display questionnaire since none was loaded or created prior.");
+            System.err.println("Could not display questionnaire since none was loaded or created prior.");
         }
         return new Menu1Driver();
     }

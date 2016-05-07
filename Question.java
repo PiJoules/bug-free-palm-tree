@@ -7,12 +7,12 @@ public class Question {
     private final String ANSWER_TYPE_KEY = "answerType";
     private final String EXPECTED_ANSWER_KEY = "expectedAnswers";
     // Question types
-    private final String TRUE_FALSE = "TrueFalse";
-    private final String MULTIPLE_CHOICE = "MultipleChoice";
-    private final String SHORT = "Short";
-    private final String ESSAY = "Essay";
-    private final String RANK_CHOICES = "RankChoices";
-    private final String MATCHING = "Matching";
+    public static final String TRUE_FALSE = "TrueFalse";
+    public static final String MULTIPLE_CHOICE = "MultipleChoice";
+    public static final String SHORT = "Short";
+    public static final String ESSAY = "Essay";
+    public static final String RANK_CHOICES = "RankChoices";
+    public static final String MATCHING = "Matching";
 
     private final String text;
     private final ArrayList<Answer> answers;  // Expected answer(s)
@@ -103,6 +103,67 @@ public class Question {
         // Set properties
         this.text = questionJson.getString(QUESTION_TEXT_KEY);
         this.answers = answers_;
+    }
+
+    /**
+     * Convert this question to JSON.
+     */
+    public JSONObject toJSON(){
+        JSONObject questionJson = new JSONObject();
+
+        // Question text
+        questionJson.put(QUESTION_TEXT_KEY, text);
+
+        // Get answer type
+        String answerType;
+        Answer answer = answers.get(0);
+        if (answer.getClass().equals(TrueFalseAnswer.class)){
+            answerType = TRUE_FALSE;
+        }
+        else if (answer.getClass().equals(MultipleChoiceAnswer.class)){
+            answerType = MULTIPLE_CHOICE;
+        }
+        else if (answer.getClass().equals(ShortAnswer.class)){
+            answerType = SHORT;
+        }
+        else if (answer.getClass().equals(EssayAnswer.class)){
+            answerType = ESSAY;
+        }
+        else if (answer.getClass().equals(RankChoicesAnswer.class)){
+            answerType = RANK_CHOICES;
+        }
+        else {
+            answerType = MATCHING;
+        }
+        questionJson.put(ANSWER_TYPE_KEY, answerType);
+
+        // Expected answers (if any)
+        JSONArray expectedAnswers = new JSONArray();
+        for (Answer a : answers){
+            switch (answerType){
+                case TRUE_FALSE:
+                    expectedAnswers.put(((TrueFalseAnswer)a).getChoice());
+                    break;
+                case MULTIPLE_CHOICE:
+                    expectedAnswers.put(((MultipleChoiceAnswer)a).toJSON());
+                    break;
+                case ESSAY:
+                    expectedAnswers.put(((EssayAnswer)a).getText());
+                    break;
+                case SHORT:
+                    expectedAnswers.put(((ShortAnswer)a).getText());
+                    break;
+                case RANK_CHOICES:
+                    expectedAnswers.put(((RankChoicesAnswer)a).toJSON());
+                    break;
+                case MATCHING:
+                    expectedAnswers.put(((MatchingAnswer)a).toJSON());
+                    break;
+            }
+        }
+        questionJson.put(EXPECTED_ANSWER_KEY, expectedAnswers);
+
+        return questionJson;
     }
 
     /**

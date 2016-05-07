@@ -20,12 +20,16 @@ public class MainDriver {
             // Get next driver from user input
             Driver nextDriver;
             if (driver instanceof DisplaySurveyDriver){
-                DisplaySurveyDriver displayDriver = (DisplaySurveyDriver)driver;
                 nextDriver = driver.handleInput(null, survey);
             }
             else if (driver instanceof DisplayTestDriver){
-                DisplayTestDriver displayDriver = (DisplayTestDriver)driver;
                 nextDriver = driver.handleInput(null, test);
+            }
+            else if (driver instanceof SaveSurveyDriver){
+                nextDriver = driver.handleInput(scanner, survey);
+            }
+            else if (driver instanceof SaveTestDriver){
+                nextDriver = driver.handleInput(scanner, test);
             }
             else {
                 System.out.print("> ");  // Print new shell marker

@@ -9,9 +9,12 @@ build:
 	javac -cp $(JAVA_CLASSPATH) *.java
 
 dryrunsurvey: build
-	java -cp $(JAVA_CLASSPATH) MainDriver test.survey.txt
+	java -cp $(JAVA_CLASSPATH) MainDriver survey.txt
 
-dryrun: dryrunsurvey
+dryruntest: build
+	java -cp $(JAVA_CLASSPATH) MainDriver test.txt
+
+dryrun: dryrunsurvey dryruntest
 
 test: dryrun
 
