@@ -5,11 +5,17 @@ Creating, Displaying, and Storing a Survey/Test to a File
 ## Save file format
 The save file for a questionnaire will just be json. The questionnaire
 will be a list of dictionaries with the keys "questionText", "answerType",
-and "expectedAnswer". Both the questionText and answerType are strings
-and the expectedAnswer varies depending on the answerType.
+and "expectedAnswers". Both the questionText and answerType are strings
+and the expectedAnswers are lists of varying types depending on the answerType.
+
+A question with only one answer is represented by an expectedAnswers list
+of length 1.
+
+The expectedAnswers key is required in a Test, but not required in a Survey.
+Both the questionText and answerType are required in both a Survey and Test.
 
 ### Possible answerTypes
-If an incorrect expectedAnswer format is provided for a given answerType,
+If an incorrect expectedAnswers format is provided for a given answerType,
 an Exception is thrown.
 
 #### TrueFalse
@@ -18,7 +24,7 @@ expectedAnswer is a boolean
 {
     "questionText": "Is 5 greater than 3?",
     "answerType": "TrueFalse",
-    "expectedAnswer": True
+    "expectedAnswers": [True]
 }
 ```
 
@@ -34,33 +40,34 @@ expectedAnswer is a list of strings
         D: Potato
     ",
     "answerType": "MultipleChoice",
-    "expectedAnswer": ["A", "B", "C"]
+    "expectedAnswers": [["A", "B", "C"]]
 }
 ```
 
 #### Short
-expectedAnswer can be null or a string. If it is null, it will not be graded.
+expectedAnswers can be null or a string. If it is null, it will not be graded.
 If it is a string, it will be graded.
+A ShortAnswer is marked as correct if the expected answers are equal (ignoring case).
 ```json
 {
     "questionText": "What is the square?",
     "answerType": "Short",
-    "expectedAnswer": "4 angles"
+    "expectedAnswers": ["4 angles", "A rectangle"]
 }
 ```
 
 #### Essay
-expectedAnswer is null and cannot be graded.
+expectedAnswers is null and cannot be graded.
 ```json
 {
     "questionText": "How complex is the square?",
     "answerType": "Essay",
-    "expectedAnswer": null
+    "expectedAnswers": [null]
 }
 ```
 
 #### RankChoices
-expectedAnswer is a list of strings.
+expectedAnswers is a list of strings.
 ```json
 {
     "questionText": "
@@ -71,12 +78,12 @@ expectedAnswer is a list of strings.
         D: 2 
     ",
     "answerType": "RankChoices",
-    "expectedAnswer": ["B", "C", "D", "A"]
+    "expectedAnswers": [["B", "C", "D", "A"]]
 }
 ```
 
 #### Matching
-expectedAnswer is a list of strings where each string is in the format "number-letter".
+expectedAnswers is a list of strings where each string is in the format "number-letter".
 ```json
 {
     "questionText": "
@@ -88,11 +95,11 @@ expectedAnswer is a list of strings where each string is in the format "number-l
         (4): 2+2      D: 4
     ",
     "answerType": "RankChoices",
-    "expectedAnswer": ["1-C", "2-A", "3-B", "4-D"]
+    "expectedAnswers": [["1-C", "2-A", "3-B", "4-D"]]
 }
 ```
 
-### Example file
+### Example Test file
 ```json
 [
     {
@@ -105,12 +112,12 @@ expectedAnswer is a list of strings where each string is in the format "number-l
             (4): 2+2      D: 4
         ",
         "answerType": "RankChoices",
-        "expectedAnswer": ["1-C", "2-A", "3-B", "4-D"]
+        "expectedAnswers": ["1-C", "2-A", "3-B", "4-D"]
     },
     {
         "questionText": "Is 5 greater than 3?",
         "answerType": "True",
-        "expectedAnswer": True
+        "expectedAnswers": True
     },
     ...
 ]

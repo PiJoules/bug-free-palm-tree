@@ -1,11 +1,18 @@
 import java.util.Scanner;
-import java.util.HashMap;
+import java.io.File;
 
 public class MainDriver {
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception{
         Driver driver = new Menu1Driver();
-        Scanner scanner = new Scanner(System.in);
-        Questionnaire questionnaire = null;
+        Scanner scanner;
+        if (args.length < 1){
+            scanner = new Scanner(System.in);
+        }
+        else {
+            scanner = new Scanner(new File(args[0]));
+        }
+        Test test = null;
+        Survey survey = null;
 
         while (true){
             driver.showPrompt();
@@ -23,11 +30,19 @@ public class MainDriver {
 
                 // Load any new questionnaires
                 if (menu1Driver.getSurvey() != null){
-                    questionnaire = menu1Driver.getSurvey();
+                    survey = menu1Driver.getSurvey();
                 }
                 else if (menu1Driver.getTest() != null){
-                    questionnaire = menu1Driver.getTest();
+                    test = menu1Driver.getTest();
                 }
+            }
+            else if (driver instanceof LoadSurveyDriver){
+                LoadSurveyDriver loadSurveyDriver = (LoadSurveyDriver)driver;
+                survey = loadSurveyDriver.getSurvey();
+            }
+            else if (driver instanceof LoadTestDriver){
+                LoadTestDriver loadTestDriver = (LoadTestDriver)driver;
+                test = loadTestDriver.getTest();
             }
 
             // Change to the new driver

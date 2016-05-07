@@ -1,14 +1,15 @@
-import java.util.ArrayList;
+public class TrueFalseAnswer extends Answer {
+    protected boolean choice = false;
 
-public class TrueFalseAnswer extends MultipleChoiceAnswer {
     /**
      * Constructors
      */
-    public TrueFalseAnswer(){
-        super();
-        ArrayList<String> choices = new ArrayList<>();
-        choices.add("True");
-        choices.add("False");
-        this.choices = choices;
+    public TrueFalseAnswer(){}
+    public TrueFalseAnswer(boolean choice){
+        this.choice = choice;
+    }
+
+    public final boolean getChoice(){
+        return choice;
     }
 }

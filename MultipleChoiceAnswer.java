@@ -10,7 +10,9 @@ public class MultipleChoiceAnswer extends Answer {
     /**
      * Constructors
      */
-    public MultipleChoiceAnswer(){}
+    public MultipleChoiceAnswer(){
+        this(new ArrayList<String>());
+    }
     public MultipleChoiceAnswer(ArrayList<String> choices){
         this.choices = choices;
     }
