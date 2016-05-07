@@ -42,6 +42,10 @@ public class Menu1Driver extends MenuDriver {
             case 2:
                 test = new Test();
                 return new Menu2Driver();
+            case 3:
+                return new DisplaySurveyDriver();
+            case 4:
+                return new DisplayTestDriver();
             case 5:
                 return new LoadSurveyDriver();
             case 6:

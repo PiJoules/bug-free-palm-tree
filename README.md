@@ -18,6 +18,10 @@ Both the questionText and answerType are required in both a Survey and Test.
 If an incorrect expectedAnswers format is provided for a given answerType,
 an Exception is thrown.
 
+(For the examples below with multilne strings for questionText, json does not accept
+this type of multiline string, only newlines. These multiline strings are only here
+as an example of the field usages.)
+
 #### TrueFalse
 expectedAnswer is a boolean
 ```json
@@ -99,27 +103,6 @@ expectedAnswers is a list of strings where each string is in the format "number-
 }
 ```
 
-### Example Test file
-```json
-[
-    {
-        "questionText": "
-            Question: Please match the following two columns
-            Column1    Column2
-            (1): 1+1      A: 7       
-            (2): 5+2      B: 6 
-            (3): 3+3      C: 2
-            (4): 2+2      D: 4
-        ",
-        "answerType": "RankChoices",
-        "expectedAnswers": ["1-C", "2-A", "3-B", "4-D"]
-    },
-    {
-        "questionText": "Is 5 greater than 3?",
-        "answerType": "True",
-        "expectedAnswers": True
-    },
-    ...
-]
-```
+### Example Survey file
+An example survey json file can be found in example.survey.json.
 

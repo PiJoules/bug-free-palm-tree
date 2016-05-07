@@ -11,6 +11,7 @@ public class LoadTestDriver extends Driver {
         String filename = scan.next();
         try {
             test = new Test(filename);
+            System.out.println("Successfully loaded " + filename);
         }
         catch (Exception e){
             System.err.printf("Could not load from file '%s': %s\n", filename, e.getMessage());

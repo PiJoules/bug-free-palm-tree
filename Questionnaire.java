@@ -36,6 +36,19 @@ public class Questionnaire {
     }
 
     /**
+     * Display the questionnaire in a readble format.
+     */
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < questions.size(); i++){
+            Question question = questions.get(i);
+            sb.append(String.format("Question %d. %s\n\n", i + 1, question.getText()));
+        }
+        return sb.toString();
+    }
+
+    /**
      * Getters
      */
     public ArrayList<Question> getQuestions(){

@@ -16,10 +16,21 @@ public class MainDriver {
 
         while (true){
             driver.showPrompt();
-            System.out.print("> ");
 
             // Get next driver from user input
-            Driver nextDriver = driver.handleInput(scanner);
+            Driver nextDriver;
+            if (driver instanceof DisplaySurveyDriver){
+                DisplaySurveyDriver displayDriver = (DisplaySurveyDriver)driver;
+                nextDriver = driver.handleInput(null, survey);
+            }
+            else if (driver instanceof DisplayTestDriver){
+                DisplayTestDriver displayDriver = (DisplayTestDriver)driver;
+                nextDriver = driver.handleInput(null, test);
+            }
+            else {
+                System.out.print("> ");  // Print new shell marker
+                nextDriver = driver.handleInput(scanner);
+            }
 
             // Handle updated driver
             if (driver instanceof Menu1Driver){

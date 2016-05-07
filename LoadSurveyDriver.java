@@ -11,6 +11,7 @@ public class LoadSurveyDriver extends Driver {
         String filename = scan.next();
         try {
             survey = new Survey(filename);
+            System.out.println("Successfully loaded " + filename);
         }
         catch (Exception e){
             System.err.printf("Could not load from file '%s': %s\n", filename, e.getMessage());
