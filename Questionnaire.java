@@ -45,13 +45,16 @@ public class Questionnaire {
             for (int i = 0; i < questionnaireJson.length(); i++){
                 JSONObject questionJson = questionnaireJson.getJSONObject(i);
                 String answerType = questionJson.getString(ANSWER_TYPE_KEY);
+                Answer answer = null;
 
                 // Remarkably, the JDK7 release allows for using Strings, an
                 // Object, in switch statements as you would normally expect.
                 switch (answerType){
                     case TRUE_FALSE:
+                        answer = new TrueFalseAnswer(questionJson.getBoolean(EXPECTED_ANSWER_KEY));
                         break;
                     case MULTIPLE_CHOICE:
+                        answer = new MultipleChoiceAnswer(questionJson.getJSONArray(EXPECTED_ANSWER_KEY));
                         break;
                     case SHORT:
                         break;

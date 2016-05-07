@@ -1,4 +1,4 @@
-public abstract class Question {
+public class Question {
     private final String text;
     private final Answer answer;  // Expected answer
 
@@ -12,5 +12,15 @@ public abstract class Question {
     }
     public Question(String text){
         this(text, null);
+    }
+
+    /**
+     * Getters
+     */
+    public final String getText(){
+        return text;
+    }
+    public final Answer getAnswer(){
+        return answer;
     }
 }

@@ -1,2 +1,2 @@
-public class Answer {
+public abstract class Answer {
 }
