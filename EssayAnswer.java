@@ -14,4 +14,9 @@ public class EssayAnswer extends Answer {
     public final String getText(){
         return text;
     }
+
+    @Override
+    public String toString(){
+        return text;
+    }
 }

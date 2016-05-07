@@ -36,4 +36,13 @@ public class MultipleChoiceAnswer extends Answer {
     public JSONArray toJSON(){
         return new JSONArray(choices);
     }
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for (String choice : choices){
+            sb.append(choice + "\n");
+        }
+        return sb.toString();
+    }
 }

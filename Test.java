@@ -14,4 +14,22 @@ public class Test extends Questionnaire {
             }
         }
     }
+
+    /**
+     * Display the questionnaire in a readble format.
+     */
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < questions.size(); i++){
+            Question question = questions.get(i);
+            sb.append(String.format("Question %d. %s\n\n", i + 1, question.getText()));
+            sb.append(String.format("Answer(s) to %d:\n", i + 1));
+            for (Answer answer : question.getAnswers()){
+                sb.append(String.format("%s\n", answer.toString()));
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }

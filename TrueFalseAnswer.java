@@ -12,4 +12,9 @@ public class TrueFalseAnswer extends Answer {
     public final boolean getChoice(){
         return choice;
     }
+
+    @Override
+    public String toString(){
+        return Boolean.toString(choice);
+    }
 }
