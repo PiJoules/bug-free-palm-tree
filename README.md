@@ -1,6 +1,30 @@
 # Survey/Test Taking System (Assignment 2)
 Creating, Displaying, and Storing a Survey/Test to a File
 
+## Usage
+Everything is handled in a Makefile.
+
+To run normally:
+```sh
+$ make
+```
+
+To run the tests/dry runs:
+```sh
+$ make test
+```
+
+
+### Features
+All the required features in Assignment 2 should be implemented such that everything
+on both menus does something.
+
+One question and one test can be loaded/handled at a time.
+
+You cannot save a test/survey if one is not created or previously loaded.
+
+A new survey/test will not be saved unless you choose to do so on menu 1.
+
 
 ## Save file format
 The save file for a questionnaire will just be json. The questionnaire
@@ -103,6 +127,7 @@ expectedAnswers is a list of strings where each string is in the format "number-
 }
 ```
 
-### Example Survey file
+### Example files
 An example survey json file can be found in example.survey.json.
+An example test json file can be found in example.test.json.
 

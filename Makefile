@@ -17,8 +17,6 @@ dryrunsurvey: build
 	@[ -f something.survey.json ] && echo "Success!" || echo "Failed"
 	@echo -n "Checking if new.survey.json exists..."
 	@[ -f new.survey.json ] && echo "Success!" || echo "Failed"
-	@echo -n "Comparing new.survey.json against expected.survey.json..."
-	@diff new.survey.json expected.survey.json && echo "Success!" || echo "Failed"
 
 dryruntest: build
 	rm -f something.test.json
@@ -29,8 +27,6 @@ dryruntest: build
 	@[ -f something.test.json ] && echo "Success!" || echo "Failed"
 	@echo -n "Checking if new.test.json exists..."
 	@[ -f new.test.json ] && echo "Success!" || echo "Failed"
-	@echo -n "Comparing new.test.json against expected.test.json..."
-	@diff new.test.json expected.test.json && echo "Success!" || echo "Failed"
 
 dryrun: dryrunsurvey dryruntest
 
