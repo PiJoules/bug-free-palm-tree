@@ -8,6 +8,8 @@ public abstract class AddQuestionDriver extends Driver {
 
     public void showPrompt(){
         System.out.println("Enter the prompt for your " + questionName() + " question:");
+        System.out.println("You can enter a single newline by pressing enter once.");
+        System.out.println("Press enter twice in a row to finish entering the question.");
     }
 
     /**
@@ -29,6 +31,9 @@ public abstract class AddQuestionDriver extends Driver {
         return lines;
     }
 
+    /**
+     * Read multiple lines into 1 string.
+     */
     protected String readMultiLineString(Scanner scanner, String delimiter){
         StringBuilder sb = new StringBuilder();
         for (String line : readMultipleLines(scanner)){
@@ -43,5 +48,20 @@ public abstract class AddQuestionDriver extends Driver {
     }
     protected String readMultiLineString(Scanner scanner){
         return readMultiLineString(scanner, "\n");
+    }
+
+    /**
+     * Validating input
+     */
+    protected boolean isValidAnswer(String text){
+        return !text.equalsIgnoreCase("");
+    }
+    protected boolean isValidAnswers(ArrayList<String> texts){
+        for (String text : texts){
+            if (!isValidAnswer(text)){
+                return false;
+            }
+        }
+        return true;
     }
 }

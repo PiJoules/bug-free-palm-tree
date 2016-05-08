@@ -29,6 +29,14 @@ public class Menu2Driver extends MenuDriver {
                 return new AddTrueFalseQuestion();
             case 2:
                 return new AddMultipleChoiceQuestion();
+            case 3:
+                return new AddShortQuestion();
+            case 4:
+                return new AddEssayQuestion();
+            case 5:
+                return new AddRankChoicesQuestion();
+            case 6:
+                return new AddMatchingQuestion();
             case 7:
                 return new Menu1Driver();
         }

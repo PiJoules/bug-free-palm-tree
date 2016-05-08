@@ -1,9 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class AddMultipleChoiceQuestion extends AddQuestionDriver {
+public class AddRankChoicesQuestion extends AddQuestionDriver {
     protected String questionName(){
-        return "multiple choice";
+        return "ranking choices";
     }
 
     /**
@@ -21,20 +21,20 @@ public class AddMultipleChoiceQuestion extends AddQuestionDriver {
         // Get answer if Test
         Questionnaire questionnaire = (Questionnaire)args[0];
         ArrayList<Answer> answers = new ArrayList<>();
-        MultipleChoiceAnswer answer;
+        RankChoicesAnswer answer;
         boolean gradeable = false;
         if (questionnaire instanceof Test){
             ArrayList<String> entries = new ArrayList<>();
             do {
-                System.out.println("Enter your valid choices one line at a time. You must provide at least one.");
+                System.out.println("Enter the correct ranking one line at a time. You must provide at least one.");
                 System.out.println("Press enter twice in a row to finish entering the question.");
                 entries = readMultipleLines(scanner);
             } while (entries.isEmpty() || !isValidAnswers(entries));
-            answer = new MultipleChoiceAnswer(entries);
+            answer = new RankChoicesAnswer(entries);
             gradeable = true;
         }
         else {
-            answer = new MultipleChoiceAnswer();
+            answer = new RankChoicesAnswer();
         }
         answers.add(answer);
 

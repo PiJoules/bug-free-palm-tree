@@ -47,7 +47,8 @@ public class AddTrueFalseQuestion extends AddQuestionDriver {
     /**
      * Only accept true/false as valid anser
      */
-    private boolean isValidAnswer(String text){
+    @Override
+    protected boolean isValidAnswer(String text){
         boolean isValid = text.equalsIgnoreCase("false") || text.equalsIgnoreCase("true");
         if (!isValid){
             System.err.println("Invalid anwer. The answer can only be 'true' or 'false'.");
