@@ -4,4 +4,32 @@ example.test.json
 8
 something.test.json
 4
+
+2
+1
+Is 5 greater than 3?
+asdfgh
+true
+7
+8
+new.test.json
+4
+
+2
+2
+Which of the following are fruit?
+A: Apple
+B: Banana
+C: Water Mellon
+D: Potato
+
+A
+B
+C
+
+7
+8
+new.test.json
+4
+
 9

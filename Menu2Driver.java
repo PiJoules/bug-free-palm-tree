@@ -26,7 +26,9 @@ public class Menu2Driver extends MenuDriver {
         // Handle valid input
         switch (selection_){
             case 1:
-                break;
+                return new AddTrueFalseQuestion();
+            case 2:
+                return new AddMultipleChoiceQuestion();
             case 7:
                 return new Menu1Driver();
         }

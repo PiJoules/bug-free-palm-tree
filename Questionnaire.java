@@ -51,6 +51,13 @@ public class Questionnaire {
     }
 
     /**
+     * Add a new question.
+     */
+    public void addQuestion(Question question){
+        questions.add(question);
+    }
+
+    /**
      * Display the questionnaire in a readble format.
      */
     @Override

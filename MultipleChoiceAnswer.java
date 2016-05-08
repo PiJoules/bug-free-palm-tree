@@ -17,7 +17,6 @@ public class MultipleChoiceAnswer extends Answer {
         this.choices = choices;
     }
     public MultipleChoiceAnswer(JSONArray answerObj) throws JSONException {
-        choices.clear();
         for (int i = 0; i < answerObj.length(); i++){
             choices.add(answerObj.getString(i));
         }

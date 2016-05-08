@@ -4,4 +4,26 @@ example.survey.json
 7
 something.survey.json
 3
+
+1
+1
+Is 5 greater than 3?
+7
+7
+new.survey.json
+3
+
+1
+2
+Which of the following are fruit?
+A: Apple
+B: Banana
+C: Water Mellon
+D: Potato
+
+7
+7
+new.survey.json
+3
+
 9
