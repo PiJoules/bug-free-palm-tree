@@ -2,7 +2,8 @@
 Creating, Displaying, and Storing a Survey/Test to a File
 
 ## Usage
-Everything is handled in a Makefile.
+Everything is handled in a Makefile. This program was meant to run and compile on Tux
+since I don't want to use an IDE.
 
 To run normally:
 ```sh
