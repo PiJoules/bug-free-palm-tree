@@ -178,4 +178,25 @@ public class Question {
     public final boolean isGradable(){
         return gradable;
     }
+    public final QuestionType type(){
+        Answer answer = answers.get(0);
+        if (answer.getClass().equals(TrueFalseAnswer.class)){
+            return QuestionType.TRUE_FALSE;
+        }
+        else if (answer.getClass().equals(MultipleChoiceAnswer.class)){
+            return QuestionType.MULTIPLE_CHOICE;
+        }
+        else if (answer.getClass().equals(ShortAnswer.class)){
+            return QuestionType.SHORT;
+        }
+        else if (answer.getClass().equals(EssayAnswer.class)){
+            return QuestionType.ESSAY;
+        }
+        else if (answer.getClass().equals(RankChoicesAnswer.class)){
+            return QuestionType.RANK_CHOICES;
+        }
+        else {
+            return QuestionType.MATCHING;
+        }
+    }
 }

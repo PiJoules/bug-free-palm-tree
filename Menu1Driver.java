@@ -21,7 +21,14 @@ public class Menu1Driver extends MenuDriver {
             "6) Load a Test",
             "7) Save a Survey",
             "8) Save a Test",
-            "9) Quit"
+            "9) Modify an Existing Survey",
+            "10) Modify an Existing Test",
+            "11) Take a Survey",
+            "12) Take a Test",
+            "13) Grade a Test",
+            "14) Tabulate a Survey",
+            "15) Tabulate a Test",
+            "16) Quit"
         };
     }
     protected final String header(){
@@ -54,7 +61,7 @@ public class Menu1Driver extends MenuDriver {
                 return new SaveSurveyDriver();
             case 8:
                 return new SaveTestDriver();
-            case 9:
+            case 16:
                 shouldExit_ = true;
                 break;
         }
