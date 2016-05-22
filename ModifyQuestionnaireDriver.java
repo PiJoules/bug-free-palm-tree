@@ -197,7 +197,7 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
             questionnaire.replaceQuestion(selection_ - 1, newQuestion);
         }
         else {
-            System.err.println("Could not edit questionnaire since none was loaded or created prior.");
+            System.err.println("Could not modify questionnaire since none was loaded or created prior.");
         }
 
         return new Menu1Driver();

@@ -17,4 +17,13 @@ public class TrueFalseAnswer extends Answer {
     public String toString(){
         return Boolean.toString(choice);
     }
+
+    @Override
+    public boolean equals(Object other){
+        if (!(other instanceof TrueFalseAnswer)){
+            return false;
+        }
+
+        return choice == ((TrueFalseAnswer)other).getChoice();
+    }
 }

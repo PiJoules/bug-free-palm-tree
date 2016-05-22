@@ -9,4 +9,13 @@ public class ShortAnswer extends EssayAnswer {
     public ShortAnswer(String text){
         super(text);
     }
+
+    @Override
+    public boolean equals(Object other){
+        if (!(other instanceof ShortAnswer)){
+            return false;
+        }
+
+        return getText().equals(((ShortAnswer)other).getText());
+    }
 }

@@ -26,7 +26,7 @@
   },
   {
       "questionText": "Question: Please match the following two columns\nColumn1    Column2\n(1): 1+1   A: 7       \n(2): 5+2   B: 6 \n(3): 3+3   C: 2\n(4): 2+2   D: 4",
-      "answerType": "RankChoices",
+      "answerType": "Matching",
       "expectedAnswers": [["1-C", "2-A", "3-B", "4-D"]]
   }
 ]
