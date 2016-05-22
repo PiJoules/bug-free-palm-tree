@@ -17,7 +17,7 @@ $ make test
 
 
 ### Features
-All the required features in Assignment 2 should be implemented such that everything
+All the required features in Assignment 3 should be implemented such that everything
 on both menus does something.
 
 One question and one test can be loaded/handled at a time.
@@ -38,6 +38,9 @@ of length 1.
 
 The expectedAnswers key is required in a Test, but not required in a Survey.
 Both the questionText and answerType are required in both a Survey and Test.
+
+Response files are also saved in json format. 3 example responses are provided
+in responses.json, responses2.json, and responses3.json for tabulation purposes.
 
 ### Possible answerTypes
 If an incorrect expectedAnswers format is provided for a given answerType,
