@@ -31,11 +31,7 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
     }
 
     protected Boolean selection(Scanner scanner){
-        if (!scanner.hasNextBoolean()){
-            printInvalidEntry(scanner.next());
-            return null;
-        }
-        String selection = scanner.next();
+        String selection = scanner.next().trim();
         if (selection.equalsIgnoreCase("Y")){
             return true;
         }
@@ -49,7 +45,7 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
     }
 
     /**
-     * Only accept true/false as valid anser
+     * Validating input
      */
     protected boolean isValidTrueFalseAnswer(String text){
         boolean isValid = text.equalsIgnoreCase("false") || text.equalsIgnoreCase("true");
@@ -57,6 +53,17 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
             System.err.println("Invalid anwer. The answer can only be 'true' or 'false'.");
         }
         return isValid;
+    }
+    protected boolean isValidAnswer(String text){
+        return !text.equalsIgnoreCase("");
+    }
+    protected boolean isValidAnswers(ArrayList<String> texts){
+        for (String text : texts){
+            if (!isValidAnswer(text)){
+                return false;
+            }
+        }
+        return true;
     }
 
     @SuppressWarnings("unchecked")
@@ -80,10 +87,14 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
             Question question = questions.get(selection_ - 1);
             System.out.println("Prompt:");
             System.out.println(question.getText());
-            System.out.print("Do you wish to modify the prompt? (Y/N):");
-            boolean modifyPrompt = selection(scan);
+            Boolean modifyPrompt;
+            do {
+                System.out.print("Do you wish to modify the prompt? (Y/N):");
+            } while ((modifyPrompt = selection(scan)) == null);
             String questionText = question.getText();
             if (modifyPrompt){
+                System.out.println("Enter a new prompt:");
+                questionText = "";
                 // Handle valid input
                 switch (question.type()){
                     case TRUE_FALSE:
@@ -99,6 +110,8 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
                             System.err.println("You must provide a question:");
                         };
                         break;
+                    default:
+                        throw new RuntimeException("Unknown question type: " + question.type().toString());
                 }
             }
 
@@ -116,6 +129,8 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
                 boolean modifyAnswer = selection(scan);
                 if (modifyAnswer){
                     // Handle valid input
+                    Answer answer;
+                    ArrayList<String> entries = new ArrayList<>();
                     switch (question.type()){
                         case TRUE_FALSE:
                             String answerText = null;
@@ -124,26 +139,67 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
                                 while ((answerText = scan.nextLine()).isEmpty());
                             } while (answerText == null || !isValidTrueFalseAnswer(answerText));
                             answer = new TrueFalseAnswer(Boolean.parseBoolean(answerText));
-                            gradeable = true;
+                            answers.clear();
+                            answers.add(answer);
                             break;
                         case MULTIPLE_CHOICE:
-                        case SHORT:
-                        case ESSAY:
-                        case RANK_CHOICES:
-                        case MATCHING:
-                            Utils.showPrompt();
-                            while ((questionText = Utils.readMultiLineString(scan)).isEmpty()){
-                                System.err.println("You must provide a question:");
-                            };
+                            do {
+                                System.out.println("Enter your valid choices one line at a time. You must provide at least one.");
+                                System.out.println("Press enter twice in a row to finish entering the question.");
+                                entries = Utils.readMultipleLines(scan);
+                            } while (entries.isEmpty() || !isValidAnswers(entries));
+                            answer = new MultipleChoiceAnswer(entries);
+                            answers.clear();
+                            answers.add(answer);
                             break;
+                        case SHORT:
+                            do {
+                                System.out.println("Enter the correct short answers one line at a time. You must provide at least one.");
+                                System.out.println("Press enter twice in a row to finish entering the question.");
+                                entries = Utils.readMultipleLines(scan);
+                            } while (entries.isEmpty() || !isValidAnswers(entries));
+                            answers.clear();
+                            for (String entry : entries){
+                                answers.add(new ShortAnswer(entry));
+                            }
+                            break;
+                        case ESSAY:
+                            System.out.println("Essays do not have correct answers, so a correct answer cannot be entered for this question.");
+                            break;
+                        case RANK_CHOICES:
+                            do {
+                                System.out.println("Enter the correct ranking one line at a time. You must provide at least one.");
+                                System.out.println("Press enter twice in a row to finish entering the question.");
+                                entries = Utils.readMultipleLines(scan);
+                            } while (entries.isEmpty() || !isValidAnswers(entries));
+                            answer = new RankChoicesAnswer(entries);
+                            answers.clear();
+                            answers.add(answer);
+                            break;
+                        case MATCHING:
+                            do {
+                                System.out.println("Enter the correct matchings one line at a time. You must provide at least one.");
+                                System.out.println("Press enter twice in a row to finish entering the question.");
+                                entries = Utils.readMultipleLines(scan);
+                            } while (entries.isEmpty() || !isValidAnswers(entries));
+                            answer = new MatchingAnswer(entries);
+                            answers.clear();
+                            answers.add(answer);
+                            break;
+                        default:
+                            throw new RuntimeException("Unknown question type: " + question.type().toString());
                     }
+                    gradeable = true;
                 }
-            }
+            } /* if (questionnaire instanceof Test)*/
+
+            Question newQuestion = new Question(questionText, answers, gradeable);
+            questionnaire.replaceQuestion(selection_ - 1, newQuestion);
         }
         else {
             System.err.println("Could not edit questionnaire since none was loaded or created prior.");
         }
 
-        return this;
+        return new Menu1Driver();
     }
 }

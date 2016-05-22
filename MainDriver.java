@@ -36,6 +36,12 @@ public class MainDriver {
                 // Adding to new questionnaire
                 nextDriver = driver.handleInput(scanner, working);
             }
+            else if (driver instanceof ModifySurveyDriver){
+                nextDriver = driver.handleInput(scanner, survey);
+            }
+            else if (driver instanceof ModifyTestDriver){
+                nextDriver = driver.handleInput(scanner, test);
+            }
             else {
                 System.out.print("> ");  // Print new shell marker
                 nextDriver = driver.handleInput(scanner);

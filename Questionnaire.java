@@ -56,6 +56,9 @@ public class Questionnaire {
     public void addQuestion(Question question){
         questions.add(question);
     }
+    public void replaceQuestion(int i, Question question){
+        questions.set(i, question);
+    }
 
     /**
      * Display the questionnaire in a readble format.
