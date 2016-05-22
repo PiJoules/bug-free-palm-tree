@@ -44,3 +44,8 @@ new.survey.json
 3
 
 9
+6
+y
+Some new prompt
+
+16

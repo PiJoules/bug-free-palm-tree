@@ -63,4 +63,12 @@ Column1    Column2
 new.test.json
 4
 
-9
+10
+6
+y
+some question
+
+y
+some answer
+
+16
