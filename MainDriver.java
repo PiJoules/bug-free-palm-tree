@@ -51,6 +51,12 @@ public class MainDriver {
             else if (driver instanceof GradeTestDriver){
                 nextDriver = driver.handleInput(scanner, test);
             }
+            else if (driver instanceof TabulateSurveyDriver){
+                nextDriver = driver.handleInput(scanner, survey);
+            }
+            else if (driver instanceof TabulateTestDriver){
+                nextDriver = driver.handleInput(scanner, test);
+            }
             else {
                 System.out.print("> ");  // Print new shell marker
                 nextDriver = driver.handleInput(scanner);

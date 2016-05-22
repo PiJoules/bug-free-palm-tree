@@ -71,6 +71,10 @@ public class Menu1Driver extends MenuDriver {
                 return new TakeTestDriver();
             case 13:
                 return new GradeTestDriver();
+            case 14:
+                return new TabulateSurveyDriver();
+            case 15:
+                return new TabulateTestDriver();
             case 16:
                 shouldExit_ = true;
                 break;
