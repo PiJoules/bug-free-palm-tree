@@ -82,7 +82,7 @@ public class TakeQuestionnaireDriver<T extends Questionnaire> extends Driver {
                         throw new RuntimeException("Unknown question type: " + question.type().toString());
                 }
                 answers.add(answerText.trim());
-                System.out.println();
+                System.out.println("");
             }
             saveAnswers(answers, testName);
         }

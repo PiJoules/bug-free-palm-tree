@@ -124,7 +124,7 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
                 for (Answer answer : question.getAnswers()){
                     sb.append(String.format("%s\n", answer.toString()));
                 }
-                System.out.println(sb);
+                System.out.println(sb.toString());
                 System.out.print("Do you wish to modify the correct answer(s)? (Y/N):");
                 boolean modifyAnswer = selection(scan);
                 if (modifyAnswer){
