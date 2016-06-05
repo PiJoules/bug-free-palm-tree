@@ -7,9 +7,9 @@ public abstract class AddQuestionDriver extends Driver {
     protected abstract String questionName();
 
     public void showPrompt(){
-        System.out.println("Enter the prompt for your " + questionName() + " question:");
-        System.out.println("You can enter a single newline by pressing enter once.");
-        System.out.println("Press enter twice in a row to finish entering the question.");
+        VoiceStream.println("Enter the prompt for your " + questionName() + " question:");
+        VoiceStream.println("You can enter a single newline by pressing enter once.");
+        VoiceStream.println("Press enter twice in a row to finish entering the question.");
     }
 
     /**

@@ -5,7 +5,7 @@ public class DisplayDriver<T extends Questionnaire> extends Driver {
      * No need to print anything other than the questionnaire
      */
     public void showPrompt(){
-        System.out.print("");
+        VoiceStream.print("");
     }
 
     /**
@@ -17,8 +17,8 @@ public class DisplayDriver<T extends Questionnaire> extends Driver {
     public Driver handleInput(Scanner scan, Object... args){
         if (args[0] != null){
             Questionnaire questionnaire = (T)args[0];
-            System.out.println("");
-            System.out.println(questionnaire.toString());
+            VoiceStream.println("");
+            VoiceStream.println(questionnaire.toString());
         }
         else {
             System.err.println("Could not display questionnaire since none was loaded or created prior.");

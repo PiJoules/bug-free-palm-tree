@@ -24,7 +24,7 @@ public class AddTrueFalseQuestion extends AddQuestionDriver {
         if (questionnaire instanceof Test){
             String answerText = null;
             do {
-                System.out.println("Enter the answer to this question (True/False):");
+                VoiceStream.println("Enter the answer to this question (True/False):");
                 while ((answerText = scanner.nextLine()).isEmpty());
             } while (answerText == null || !isValidAnswer(answerText));
             answer = new TrueFalseAnswer(Boolean.parseBoolean(answerText));

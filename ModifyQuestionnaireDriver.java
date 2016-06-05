@@ -5,12 +5,12 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
     public void showPrompt(){}
 
     private void printInvalidEntry(String entry, int numQuestions){
-        System.out.println("Invalid entry: " + entry);
-        System.out.printf("Valid entries are: 1 - %d\n", numQuestions);
+        VoiceStream.println("Invalid entry: " + entry);
+        VoiceStream.printf("Valid entries are: 1 - %d\n", numQuestions);
     }
     private void printInvalidEntry(String entry){
-        System.out.println("Invalid entry: " + entry);
-        System.out.println("Valid entries are Y or N.");
+        VoiceStream.println("Invalid entry: " + entry);
+        VoiceStream.println("Valid entries are Y or N.");
     }
 
     /**
@@ -77,7 +77,7 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
                 return new Menu1Driver();
             }
 
-            System.out.printf("Which question do you wish to modify (1-%d):", numQuestions);
+            VoiceStream.printf("Which question do you wish to modify (1-%d):", numQuestions);
             Integer selection_ = selection(scan, numQuestions);
             if (selection_ == null){
                 return this;
@@ -85,15 +85,15 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
 
             // Change prompt
             Question question = questions.get(selection_ - 1);
-            System.out.println("Prompt:");
-            System.out.println(question.getText());
+            VoiceStream.println("Prompt:");
+            VoiceStream.println(question.getText());
             Boolean modifyPrompt;
             do {
-                System.out.print("Do you wish to modify the prompt? (Y/N):");
+                VoiceStream.print("Do you wish to modify the prompt? (Y/N):");
             } while ((modifyPrompt = selection(scan)) == null);
             String questionText = question.getText();
             if (modifyPrompt){
-                System.out.println("Enter a new prompt:");
+                VoiceStream.println("Enter a new prompt:");
                 questionText = "";
                 // Handle valid input
                 switch (question.type()){
@@ -119,13 +119,13 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
             ArrayList<Answer> answers = question.getAnswers();
             boolean gradeable = question.isGradable();
             if (questionnaire instanceof Test){
-                System.out.println("Answer(s):");
+                VoiceStream.println("Answer(s):");
                 StringBuilder sb = new StringBuilder();
                 for (Answer answer : question.getAnswers()){
                     sb.append(String.format("%s\n", answer.toString()));
                 }
-                System.out.println(sb.toString());
-                System.out.print("Do you wish to modify the correct answer(s)? (Y/N):");
+                VoiceStream.println(sb.toString());
+                VoiceStream.print("Do you wish to modify the correct answer(s)? (Y/N):");
                 boolean modifyAnswer = selection(scan);
                 if (modifyAnswer){
                     // Handle valid input
@@ -135,7 +135,7 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
                         case TRUE_FALSE:
                             String answerText = null;
                             do {
-                                System.out.println("Enter the answer to this question (True/False):");
+                                VoiceStream.println("Enter the answer to this question (True/False):");
                                 while ((answerText = scan.nextLine()).isEmpty());
                             } while (answerText == null || !isValidTrueFalseAnswer(answerText));
                             answer = new TrueFalseAnswer(Boolean.parseBoolean(answerText));
@@ -144,8 +144,8 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
                             break;
                         case MULTIPLE_CHOICE:
                             do {
-                                System.out.println("Enter your valid choices one line at a time. You must provide at least one.");
-                                System.out.println("Press enter twice in a row to finish entering the question.");
+                                VoiceStream.println("Enter your valid choices one line at a time. You must provide at least one.");
+                                VoiceStream.println("Press enter twice in a row to finish entering the question.");
                                 entries = Utils.readMultipleLines(scan);
                             } while (entries.isEmpty() || !isValidAnswers(entries));
                             answer = new MultipleChoiceAnswer(entries);
@@ -154,8 +154,8 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
                             break;
                         case SHORT:
                             do {
-                                System.out.println("Enter the correct short answers one line at a time. You must provide at least one.");
-                                System.out.println("Press enter twice in a row to finish entering the question.");
+                                VoiceStream.println("Enter the correct short answers one line at a time. You must provide at least one.");
+                                VoiceStream.println("Press enter twice in a row to finish entering the question.");
                                 entries = Utils.readMultipleLines(scan);
                             } while (entries.isEmpty() || !isValidAnswers(entries));
                             answers.clear();
@@ -164,12 +164,12 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
                             }
                             break;
                         case ESSAY:
-                            System.out.println("Essays do not have correct answers, so a correct answer cannot be entered for this question.");
+                            VoiceStream.println("Essays do not have correct answers, so a correct answer cannot be entered for this question.");
                             break;
                         case RANK_CHOICES:
                             do {
-                                System.out.println("Enter the correct ranking one line at a time. You must provide at least one.");
-                                System.out.println("Press enter twice in a row to finish entering the question.");
+                                VoiceStream.println("Enter the correct ranking one line at a time. You must provide at least one.");
+                                VoiceStream.println("Press enter twice in a row to finish entering the question.");
                                 entries = Utils.readMultipleLines(scan);
                             } while (entries.isEmpty() || !isValidAnswers(entries));
                             answer = new RankChoicesAnswer(entries);
@@ -178,8 +178,8 @@ public class ModifyQuestionnaireDriver<T extends Questionnaire> extends Driver {
                             break;
                         case MATCHING:
                             do {
-                                System.out.println("Enter the correct matchings one line at a time. You must provide at least one.");
-                                System.out.println("Press enter twice in a row to finish entering the question.");
+                                VoiceStream.println("Enter the correct matchings one line at a time. You must provide at least one.");
+                                VoiceStream.println("Press enter twice in a row to finish entering the question.");
                                 entries = Utils.readMultipleLines(scan);
                             } while (entries.isEmpty() || !isValidAnswers(entries));
                             answer = new MatchingAnswer(entries);

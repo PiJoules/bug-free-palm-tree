@@ -38,7 +38,7 @@ public class TakeQuestionnaireDriver<T extends Questionnaire> extends Driver {
                 return new Menu1Driver();
             }
 
-            System.out.println("Enter the name of the file you wish to save these answers as:");
+            VoiceStream.println("Enter the name of the file you wish to save these answers as:");
             String testName;
             while ((testName = scan.nextLine()).isEmpty());
             testName = testName.trim();
@@ -47,7 +47,7 @@ public class TakeQuestionnaireDriver<T extends Questionnaire> extends Driver {
             ArrayList<String> answers = new ArrayList<>();
             for (int i = 0; i < questions.size(); i++){
                 Question question = questions.get(i);
-                System.out.println((i + 1) + ") " +  question.getText());
+                VoiceStream.println((i + 1) + ") " +  question.getText());
                 String answerText = null;
                 switch (question.type()){
                     case TRUE_FALSE:
@@ -59,22 +59,22 @@ public class TakeQuestionnaireDriver<T extends Questionnaire> extends Driver {
                     case SHORT:
                     case ESSAY:
                         do {
-                            System.out.println("You can enter an answer with multiple lines by pressing enter.");
-                            System.out.println("Press enter twice in a row to finish entering the question.");
+                            VoiceStream.println("You can enter an answer with multiple lines by pressing enter.");
+                            VoiceStream.println("Press enter twice in a row to finish entering the question.");
                             answerText = Utils.readMultiLineString(scan);
                         } while (answerText == null || !isValidAnswer(answerText));
                         break;
                     case RANK_CHOICES:
                         do {
-                            System.out.println("Enter your answers separated by commas.");
-                            System.out.println("(Ex: A,B,C,D)");
+                            VoiceStream.println("Enter your answers separated by commas.");
+                            VoiceStream.println("(Ex: A,B,C,D)");
                             while ((answerText = scan.nextLine()).isEmpty());
                         } while (answerText == null || !isValidAnswer(answerText));
                         break;
                     case MATCHING:
                         do {
-                            System.out.println("Enter your matches separated by commas, with each match separated by dashes.");
-                            System.out.println("(Ex: 1-A,2-B,3-C,4-D)");
+                            VoiceStream.println("Enter your matches separated by commas, with each match separated by dashes.");
+                            VoiceStream.println("(Ex: 1-A,2-B,3-C,4-D)");
                             while ((answerText = scan.nextLine()).isEmpty());
                         } while (answerText == null || !isValidAnswer(answerText));
                         break;
@@ -82,7 +82,7 @@ public class TakeQuestionnaireDriver<T extends Questionnaire> extends Driver {
                         throw new RuntimeException("Unknown question type: " + question.type().toString());
                 }
                 answers.add(answerText.trim());
-                System.out.println("");
+                VoiceStream.println("");
             }
             saveAnswers(answers, testName);
         }

@@ -8,9 +8,9 @@ public class Utils {
     public static final int MAX_ENTER_COUNT = 2;
 
     public static void showPrompt(){
-        System.out.println("Enter the prompt for your question:");
-        System.out.println("You can enter a single newline by pressing enter once.");
-        System.out.println("Press enter twice in a row to finish entering the question.");
+        VoiceStream.println("Enter the prompt for your question:");
+        VoiceStream.println("You can enter a single newline by pressing enter once.");
+        VoiceStream.println("Press enter twice in a row to finish entering the question.");
     }
 
     /**

@@ -26,8 +26,8 @@ public class AddRankChoicesQuestion extends AddQuestionDriver {
         if (questionnaire instanceof Test){
             ArrayList<String> entries = new ArrayList<>();
             do {
-                System.out.println("Enter the correct ranking one line at a time. You must provide at least one.");
-                System.out.println("Press enter twice in a row to finish entering the question.");
+                VoiceStream.println("Enter the correct ranking one line at a time. You must provide at least one.");
+                VoiceStream.println("Press enter twice in a row to finish entering the question.");
                 entries = readMultipleLines(scanner);
             } while (entries.isEmpty() || !isValidAnswers(entries));
             answer = new RankChoicesAnswer(entries);

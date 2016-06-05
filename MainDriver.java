@@ -58,7 +58,7 @@ public class MainDriver {
                 nextDriver = driver.handleInput(scanner, test);
             }
             else {
-                System.out.print("> ");  // Print new shell marker
+                VoiceStream.print("> ");  // Print new shell marker
                 nextDriver = driver.handleInput(scanner);
             }
 
@@ -91,7 +91,7 @@ public class MainDriver {
             // Change to the new driver
             driver = nextDriver;
 
-            System.out.println("");
+            VoiceStream.println("");
         }
     }
 }

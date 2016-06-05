@@ -6,7 +6,7 @@ public class SaveDriver<T extends Questionnaire> extends Driver {
      * No need to print anything other than the questionnaire
      */
     public void showPrompt(){
-        System.out.print("");
+        VoiceStream.print("");
     }
 
     /**
@@ -18,7 +18,7 @@ public class SaveDriver<T extends Questionnaire> extends Driver {
     public Driver handleInput(Scanner scan, Object... args){
         if (args[0] != null){
             Questionnaire questionnaire = (T)args[0];
-            System.out.print("Enter the filename you would like to save this questionnaire to: ");
+            VoiceStream.print("Enter the filename you would like to save this questionnaire to: ");
             String filename = scan.next();
             try {
                 questionnaire.save(filename);

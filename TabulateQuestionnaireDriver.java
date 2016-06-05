@@ -34,13 +34,13 @@ public class TabulateQuestionnaireDriver extends Driver {
                             break;
                         case MULTIPLE_CHOICE:
                             MultipleChoiceAnswer firstMC = (MultipleChoiceAnswer)answers.get(0);
-                            System.out.println(question.getText());
-                            System.out.println(firstMC.getChoices().size() + " responses");
+                            VoiceStream.println(question.getText());
+                            VoiceStream.println(firstMC.getChoices().size() + " responses");
                             mcQuestions++;
                             break;
                         case SHORT:
-                            System.out.println(question.getText());
-                            System.out.println(question.getAnswers().size() + " responses");
+                            VoiceStream.println(question.getText());
+                            VoiceStream.println(question.getAnswers().size() + " responses");
                             shortQuestions++;
                             break;
                         case ESSAY:
@@ -48,26 +48,26 @@ public class TabulateQuestionnaireDriver extends Driver {
                             break;
                         case RANK_CHOICES:
                             RankChoicesAnswer firstRC = (RankChoicesAnswer)answers.get(0);
-                            System.out.println(question.getText());
-                            System.out.println(factorial(firstRC.getChoices().size()) + " permutations");
+                            VoiceStream.println(question.getText());
+                            VoiceStream.println(factorial(firstRC.getChoices().size()) + " permutations");
                             rankingQuestions++;
                             break;
                         case MATCHING:
                             MatchingAnswer firstM = (MatchingAnswer)answers.get(0);
-                            System.out.println(question.getText());
-                            System.out.println(factorial(firstM.getChoices().size()) + " permutations");
+                            VoiceStream.println(question.getText());
+                            VoiceStream.println(factorial(firstM.getChoices().size()) + " permutations");
                             matchingQuestions++;
                             break;
                         default:
                             throw new RuntimeException("Unknown question type: " + question.type().toString());
                     }
                 }
-                System.out.println("True/False Questions: " + tfCount);
-                System.out.println("Multiple Choice Questions: " + mcQuestions);
-                System.out.println("Short Answer Questions: " + shortQuestions);
-                System.out.println("Essay Questions: " + essayQuestions);
-                System.out.println("Matching Questions: " + matchingQuestions);
-                System.out.println("Ranking Questions: " + rankingQuestions);
+                VoiceStream.println("True/False Questions: " + tfCount);
+                VoiceStream.println("Multiple Choice Questions: " + mcQuestions);
+                VoiceStream.println("Short Answer Questions: " + shortQuestions);
+                VoiceStream.println("Essay Questions: " + essayQuestions);
+                VoiceStream.println("Matching Questions: " + matchingQuestions);
+                VoiceStream.println("Ranking Questions: " + rankingQuestions);
             }
             catch (Exception e){
                 System.err.println("Could not load/grade answers: " + e.getMessage());

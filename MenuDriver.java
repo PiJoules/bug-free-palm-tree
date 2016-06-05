@@ -5,9 +5,9 @@ public abstract class MenuDriver extends Driver {
     protected abstract String header();
 
     public void showPrompt(){
-        System.out.println(header());
+        VoiceStream.println(header());
         for (String option : options()){
-            System.out.println(option);
+            VoiceStream.println(option);
         }
     }
 
@@ -29,7 +29,7 @@ public abstract class MenuDriver extends Driver {
     }
 
     private void printInvalidEntry(String entry){
-        System.out.println("Invalid entry: " + entry);
-        System.out.printf("Valid entries are: 1 - %d\n", options().length);
+        VoiceStream.println("Invalid entry: " + entry);
+        VoiceStream.printf("Valid entries are: 1 - %d\n", options().length);
     }
 }

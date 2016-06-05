@@ -28,7 +28,7 @@ public class GradeTestDriver extends Driver {
                 }
 
                 // Create jsonarray from filename
-                System.out.print("Enter the filename of the answers you wish to grade: ");
+                VoiceStream.print("Enter the filename of the answers you wish to grade: ");
                 String filename;
                 while ((filename = scan.nextLine()).isEmpty());
                 filename = filename.trim();
@@ -100,7 +100,7 @@ public class GradeTestDriver extends Driver {
                 }
 
                 // Display results
-                System.out.printf("Grade: %%%f (%d/%d)\n", (float)correctAnswers / gradeableAnswers * 100, correctAnswers, gradeableAnswers);
+                VoiceStream.printf("Grade: %%%f (%d/%d)\n", (float)correctAnswers / gradeableAnswers * 100, correctAnswers, gradeableAnswers);
             }
             catch (Exception e){
                 System.err.println("Could not load/grade answers: " + e.getMessage());
