@@ -1,5 +1,48 @@
-# Survey/Test Taking System (Assignment 2)
+# Survey/Test Taking System Using Voice Output (Assignment 4)
 Creating, Displaying, and Storing a Survey/Test to a File
+
+
+## Voice Features
+Below are a few extra instructions and information about the text-to-speech FreeTTS software.
+I ran into a bit of obstacles that I was able to find solutions to.
+
+### FreeTTS and Ubuntu
+This project does not actually use the jars provided as part of the assignment. Instead, this
+project uses a jar of of freetts that was made from scratch. The provided pre-built jars did
+not actually work for me because I was using Ubuntu.
+
+When I was trying to compile and run the Hello World example, I would always freeze
+ont the line where voice.speak(String) is called. I found the reason and solution to this problem
+thanks to this: http://stackoverflow.com/a/11514789/2775471
+
+Essentially, on the default JavaSE that comes with Ubuntu, the default class used for managing
+audio events is PulseAudioSourceDataLine. This class is subclassed from Line, which is in charge
+of sending out some notification to all its listeners if the Line is open. The problem is that
+PulseAudioSourceDataLine is implemented in such a way that it requires receiving some response
+from its Listeners before actually opening, but the Listeners can't send out any responses until
+they receive a notification from the PulseAudioSourceDataLine, which can't send out notifications
+if it's not open. This causes the program to deadlock whenever speaking.
+
+I don't know if this problem was addressed in the latest release of FreeTTS, but the changes
+necessary to actually use this package in Ubuntu was made in this version of FreeTTS:
+https://github.com/timabell/FreeTTS
+
+I built this from source by just calling `ant` in the root directory of the repo and am able to
+successfully use it in this project by just appending including the `lib/freetts.jar` file
+onto my classpath. This fork of FreeTTS works with the default kevin16 voice and I am able to 
+compile and run the provided example and this assignment with this jar.
+
+An alternative solution to this could be to use the Oracle/Sun JDK unstead of the Ubuntu 14.04/OpenJDK,
+but I have not experimented with this solution.
+
+### Testing the voice
+Just a warning: becaue a lot of text is used in the menu and instructions, it takes a while for the translator
+to actually speak all of it, and I have not implemented a way to skip the voice on user key entry
+or speed up the speaking.
+
+The integration tests can still be run with `make test`, which still tests the whole functionality of
+the project, but it will take a long time for it to complete through speech.
+
 
 ## Usage
 Everything is handled in a Makefile. This program was meant to run and compile on Tux
