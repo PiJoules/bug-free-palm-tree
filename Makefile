@@ -1,6 +1,6 @@
 default: run
 
-JAVA_CLASSPATH=".:json-20160212.jar"
+JAVA_CLASSPATH=".:json-20160212.jar:Hello_World_FreeTTS/src/FreeTTS/lib/freetts.jar"
 
 clean:
 	rm *.class
