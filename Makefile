@@ -1,6 +1,7 @@
 default: run
 
 JAVA_CLASSPATH=".:json-20160212.jar:Hello_World_FreeTTS/src/FreeTTS/lib/freetts.jar"
+JAVA_CLASSPATH2=".:json-20160212.jar:Hello_World_FreeTTS/libs/*"
 
 clean:
 	rm *.class
@@ -34,4 +35,8 @@ test: dryrun
 
 run: build
 	java -cp $(JAVA_CLASSPATH) MainDriver
+
+run_windows:
+	javac -cp $(JAVA_CLASSPATH2) *.java
+	java -cp $(JAVA_CLASSPATH2) MainDriver
 

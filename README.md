@@ -32,6 +32,8 @@ successfully use it in this project by just appending including the `lib/freetts
 onto my classpath. This fork of FreeTTS works with the default kevin16 voice and I am able to 
 compile and run the provided example and this assignment with this jar.
 
+The location of the jar in this repo is `Hello_World_FreeTTS/src/FreeTTS/lib/freetts.jar`.
+
 An alternative solution to this could be to use the Oracle/Sun JDK unstead of the Ubuntu 14.04/OpenJDK,
 but I have not experimented with this solution.
 
@@ -42,6 +44,14 @@ or speed up the speaking.
 
 The integration tests can still be run with `make test`, which still tests the whole functionality of
 the project, but it will take a long time for it to complete through speech.
+
+### Troubleshooting Errors
+I know that Windows distributions of FreeTTS should not have this problem because they are not using
+Ubuntu 14.04/OpenJDK. So if there are any errors that arise while running this that may be caused
+by this pre-built jar file compiled on my Ubuntu computer, try instead runnning `make run_windows`
+which will compile everything using the provided jars with the assignment instead of my pre-built jar.
+I haven't tested if this works on Windows, but I have not been able to find anyone else having this problem
+on anything that isn't Ubuntu.
 
 
 ## Usage
